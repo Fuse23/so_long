@@ -6,11 +6,19 @@
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 17:41:18 by falarm            #+#    #+#             */
-/*   Updated: 2022/04/20 21:37:57 by falarm           ###   ########.fr       */
+/*   Updated: 2022/04/21 19:52:40 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+
+void	play(t_mapdata *mapdata)
+{
+	mlx_hook(mapdata->ptr.win, 2, 0, keys, mapdata);
+	mlx_hook(mapdata->ptr.win, 17, 0, end, mapdata);
+	mlx_loop_hook(mapdata->ptr.mlx, draw, mapdata);
+	mlx_loop(mapdata->ptr.mlx);
+}
 
 t_mapdata	*parsing_map(int argc, char **argv)
 {
@@ -20,6 +28,7 @@ t_mapdata	*parsing_map(int argc, char **argv)
 	check_args(argc, argv);
 	map_in_line = get_map_in_line(argv);
 	mapdata = init_mapdata(map_in_line);
+	init_sprites(mapdata);
 	check_map_whole(mapdata, argv);
 	check_map_line(mapdata);
 	check_map_arg(mapdata, -1, -1);
@@ -32,5 +41,7 @@ int	main(int argc, char **argv)
 	t_mapdata	*mapdata;
 
 	mapdata = parsing_map(argc, argv);
+	play(mapdata);
+	free_mapdata(mapdata);
 	return (0);
 }

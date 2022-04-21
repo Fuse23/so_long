@@ -16,7 +16,8 @@ HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 MLX = -L mlx -lmlx -framework OpenGL -framework AppKit
 
 SOURCES_DIRECTORY = ./src/
-SOURCES_LIST = 	main.c	errors.c	parse_checks.c	parse_utils.c
+SOURCES_LIST = 	main.c	errors.c	parse_checks.c	parse_utils.c \
+				game.c	move_left_right.c	move_up_down.c
 
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 OBJECTS_DIRECTORY = ./objects/

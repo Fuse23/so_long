@@ -6,7 +6,7 @@
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 17:38:36 by falarm            #+#    #+#             */
-/*   Updated: 2022/04/20 21:36:50 by falarm           ###   ########.fr       */
+/*   Updated: 2022/04/21 20:26:47 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,42 @@
 # include <sys/errno.h>
 # include <string.h>
 
-typedef struct s_mapdata
+// sprites
+# define WALL			"sprites/tiles/wall_1.xpm"
+# define FLOOR			"sprites/tiles/floor_1.xpm"
+# define PLAYER1		"sprites/heroes/knight_idle_anim_f0.xpm"
+# define PLAYER2		"sprites/heroes/knight_idle_anim_f5.xpm"
+# define EXIT0			"sprites/tiles/door_anim_opening_f3.xpm"
+# define EXIT1			"sprites/tiles/door_anim_opening_f9.xpm"
+# define EXIT2			"sprites/tiles/door_closed.xpm"
+# define COLLECTIBLE	"sprites/collectible/key_silver.xpm"
+# define ENEMY1			"sprites/enemies/fly_anim_f1.xpm"
+# define ENEMY2			"sprites/enemies/fly_anim_f3.xpm"
+
+// keys
+# define ESC	53
+# define UP		13
+# define DOWN	1
+# define LEFT	0
+# define RIGHT	2
+
+// size sprite X Y
+# define SPRITE_X	16
+# define SPRITE_Y	16
+
+typedef struct s_sprites
 {
-	int		hight;
-	int		width;
-	int		player_psition_x;
-	int		player_psition_y;
-	int		score;
-	int		curent_score;
-	int		steps;
-	int		game_over;
-	char	**map;
 	void	*wall;
-	void	*exit;
-	void	*item;
-	void	*player;
 	void	*floor;
-	void	*enemy;
-	int		*enemy_position;
-}	t_mapdata;
+	void	*player1;
+	void	*player2;
+	void	*exit0;
+	void	*exit1;
+	void	*exit2;
+	void	*collectible;
+	void	*enemy1;
+	void	*enemy2;
+}	t_sprites;
 
 typedef struct s_ptr
 {
@@ -48,7 +65,24 @@ typedef struct s_ptr
 	void	*win;
 }	t_ptr;
 
-void		ft_error(char *str);
+typedef struct s_mapdata
+{
+	int			hight;
+	int			width;
+	int			player_psition_x;
+	int			player_psition_y;
+	int			score;
+	int			curent_score;
+	int			steps;
+	int			game_over;
+	char		**map;
+	int			*enemy_position;
+	t_sprites	sprites;
+	t_ptr		ptr;
+}	t_mapdata;
+
+void		free_mapdata(t_mapdata *mapdata);
+void		ft_error(char *str, t_mapdata *mapdata);
 void		error_arg(char *str);
 void		error_fd(void);
 void		check_args(int ac, char **av);
@@ -59,5 +93,14 @@ void		check_map_border(t_mapdata *mapdata, int i, int j);
 char		*get_map_in_line(char **av);
 int			init_player(t_mapdata *mapdata, int i, int j);
 t_mapdata	*init_mapdata(char *line);
+void		init_sprites(t_mapdata *mapdata);
+int			keys(int key, t_mapdata *mapdata);
+int			draw(t_mapdata *mapdata);
+int			end(t_mapdata *mapdata);
+void		steps(t_mapdata *mapdata);
+void		move_right(t_mapdata *mapdata);
+void		move_left(t_mapdata *mapdata);
+void		move_up(t_mapdata *mapdata);
+void		move_down(t_mapdata *mapdata);
 
 #endif
