@@ -6,7 +6,7 @@
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:26:45 by falarm            #+#    #+#             */
-/*   Updated: 2022/04/20 21:24:16 by falarm           ###   ########.fr       */
+/*   Updated: 2022/04/28 19:25:23 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,21 @@ t_mapdata	*init_mapdata(char *line)
 		return (NULL);
 	mapdata->map = ft_split(line, '\n');
 	if (!mapdata->map[0])
-		ft_error("map");
+	{
+		ft_putendl_fd("Error: map", 2);
+		exit(EXIT_FAILURE);
+	}
 	i = 0;
 	while (mapdata->map[i])
 		i++;
 	mapdata->width = ft_strlen(mapdata->map[0]);
 	mapdata->hight = i;
 	mapdata->score = 0;
+	mapdata->curent_score = 0;
 	mapdata->steps = 0;
+	mapdata->ptr.mlx = mlx_init();
+	mapdata->ptr.win = mlx_new_window(mapdata->ptr.mlx, \
+	mapdata->width * SPRITE_X, mapdata->hight * SPRITE_Y, "so_long");
 	free(line);
 	return (mapdata);
 }
@@ -64,4 +71,30 @@ int	init_player(t_mapdata *mapdata, int i, int j)
 	mapdata->player_psition_x = i;
 	mapdata->player_psition_y = j;
 	return (1);
+}
+
+void	init_sprites(t_mapdata *mapdata)
+{
+	int	x;
+	int	y;
+
+	x = SPRITE_X;
+	y = SPRITE_Y;
+	mapdata->sprites.wall = mlx_xpm_file_to_image \
+	(mapdata->ptr.mlx, WALL, &x, &y);
+	mapdata->sprites.floor = mlx_xpm_file_to_image \
+	(mapdata->ptr.mlx, FLOOR, &x, &y);
+	mapdata->sprites.player1 = mlx_xpm_file_to_image \
+	(mapdata->ptr.mlx, PLAYER1, &x, &y);
+	mapdata->sprites.exit1 = mlx_xpm_file_to_image \
+	(mapdata->ptr.mlx, EXIT1, &x, &y);
+	mapdata->sprites.collectible = mlx_xpm_file_to_image \
+	(mapdata->ptr.mlx, COLLECTIBLE, &x, &y);
+	if (!mapdata->sprites.wall || !mapdata->sprites.floor
+		|| !mapdata->sprites.player1 || !mapdata->sprites.exit1
+		|| !mapdata->sprites.collectible)
+	{
+		ft_putendl_fd("Error: can't open xpm file", 2);
+		exit(EXIT_FAILURE);
+	}
 }

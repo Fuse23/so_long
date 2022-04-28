@@ -6,7 +6,7 @@
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 19:37:08 by falarm            #+#    #+#             */
-/*   Updated: 2022/04/21 20:27:54 by falarm           ###   ########.fr       */
+/*   Updated: 2022/04/28 18:23:01 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ void	draw_map(t_mapdata *mapdata, int i, int j)
 {
 	if (mapdata->map[i][j] == '1')
 		mlx_put_image_to_window(mapdata->ptr.mlx, mapdata->ptr.win, \
-		mapdata->sprites.wall, i * SPRITE_X, j * SPRITE_Y);
+		mapdata->sprites.wall, j * SPRITE_Y, i * SPRITE_X);
 	else if (mapdata->map[i][j] == '0')
 		mlx_put_image_to_window(mapdata->ptr.mlx, mapdata->ptr.win, \
-		mapdata->sprites.floor, i * SPRITE_X, j * SPRITE_Y);
+		mapdata->sprites.floor, j * SPRITE_Y, i * SPRITE_X);
 	else if (mapdata->map[i][j] == 'C')
 		mlx_put_image_to_window(mapdata->ptr.mlx, mapdata->ptr.win, \
-		mapdata->sprites.collectible, i * SPRITE_X, j * SPRITE_Y);
+		mapdata->sprites.collectible, j * SPRITE_Y, i * SPRITE_X);
 	else if (mapdata->map[i][j] == 'E')
 		mlx_put_image_to_window(mapdata->ptr.mlx, mapdata->ptr.win, \
-		mapdata->sprites.exit1, i * SPRITE_X, j * SPRITE_Y);
+		mapdata->sprites.exit1, j * SPRITE_Y, i * SPRITE_X);
 	else if (mapdata->map[i][j] == 'P')
 		mlx_put_image_to_window(mapdata->ptr.mlx, mapdata->ptr.win, \
-		mapdata->sprites.player1, i * SPRITE_X, j * SPRITE_Y);
+		mapdata->sprites.player1, j * SPRITE_Y, i * SPRITE_X);
 }
 
 int	draw(t_mapdata *mapdata)
