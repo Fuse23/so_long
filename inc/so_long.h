@@ -6,7 +6,7 @@
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 17:38:36 by falarm            #+#    #+#             */
-/*   Updated: 2022/04/21 20:26:47 by falarm           ###   ########.fr       */
+/*   Updated: 2022/04/29 19:30:05 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@
 # define WALL			"sprites/tiles/wall_1.xpm"
 # define FLOOR			"sprites/tiles/floor_1.xpm"
 # define PLAYER1		"sprites/heroes/knight_idle_anim_f0.xpm"
-# define PLAYER2		"sprites/heroes/knight_idle_anim_f5.xpm"
+# define PLAYER2		"sprites/heroes/knight_run_anim_f5.xpm"
 # define EXIT0			"sprites/tiles/door_anim_opening_f3.xpm"
-# define EXIT1			"sprites/tiles/door_anim_opening_f9.xpm"
-# define EXIT2			"sprites/tiles/door_closed.xpm"
+# define EXIT1			"sprites/tiles/door_closed.xpm"
 # define COLLECTIBLE	"sprites/collectible/key_silver.xpm"
 # define ENEMY1			"sprites/enemies/fly_anim_f1.xpm"
 # define ENEMY2			"sprites/enemies/fly_anim_f3.xpm"
@@ -53,7 +52,6 @@ typedef struct s_sprites
 	void	*player2;
 	void	*exit0;
 	void	*exit1;
-	void	*exit2;
 	void	*collectible;
 	void	*enemy1;
 	void	*enemy2;
@@ -102,5 +100,8 @@ void		move_right(t_mapdata *mapdata);
 void		move_left(t_mapdata *mapdata);
 void		move_up(t_mapdata *mapdata);
 void		move_down(t_mapdata *mapdata);
+//bonus
+void		check_map_line_bonus(t_mapdata *mapdata);
+void		init_sprites2(t_mapdata *mapdata, int x, int y);
 
 #endif
