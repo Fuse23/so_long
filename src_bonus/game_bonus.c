@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.c                                             :+:      :+:    :+:   */
+/*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 19:37:08 by falarm            #+#    #+#             */
-/*   Updated: 2022/04/28 18:23:01 by falarm           ###   ########.fr       */
+/*   Updated: 2022/05/13 20:58:22 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,44 @@ void	draw_map(t_mapdata *mapdata, int i, int j)
 		mapdata->sprites.collectible, j * SPRITE_Y, i * SPRITE_X);
 	else if (mapdata->map[i][j] == 'E')
 		mlx_put_image_to_window(mapdata->ptr.mlx, mapdata->ptr.win, \
-		mapdata->sprites.exit1, j * SPRITE_Y, i * SPRITE_X);
+		mapdata->sprites.exit, j * SPRITE_Y, i * SPRITE_X);
 	else if (mapdata->map[i][j] == 'P')
 		mlx_put_image_to_window(mapdata->ptr.mlx, mapdata->ptr.win, \
-		mapdata->sprites.player1, j * SPRITE_Y, i * SPRITE_X);
+		mapdata->sprites.player, j * SPRITE_Y, i * SPRITE_X);
+	else if (mapdata->map[i][j] == 'X')
+		mlx_put_image_to_window(mapdata->ptr.mlx, mapdata->ptr.win, \
+		mapdata->sprites.enemy, j * SPRITE_Y, i * SPRITE_X);
+}
+
+void	animation(t_mapdata *mapdata)
+{
+	enemy_move(mapdata);
+	if (mapdata->sprites.player == mapdata->sprites.player1)
+		mapdata->sprites.player = mapdata->sprites.player2;
+	else if (mapdata->sprites.player == mapdata->sprites.player2)
+		mapdata->sprites.player = mapdata->sprites.player1;
+	if (mapdata->sprites.enemy == mapdata->sprites.enemy1)
+		mapdata->sprites.enemy = mapdata->sprites.enemy2;
+	else if (mapdata->sprites.enemy == mapdata->sprites.enemy2)
+		mapdata->sprites.enemy = mapdata->sprites.enemy1;
+	if (mapdata->score == mapdata->curent_score)
+		mapdata->sprites.exit = mapdata->sprites.exit0;
 }
 
 int	draw(t_mapdata *mapdata)
 {
-	int	i;
-	int	j;
+	static int	k;
+	int			i;
+	int			j;
+	char		*count;
 
+	k++;
+	if (k > 35)
+	{
+		animation(mapdata);
+		k = 0;
+	}
+	count = ft_itoa(mapdata->steps);
 	i = -1;
 	while (mapdata->map[++i])
 	{
@@ -43,18 +70,22 @@ int	draw(t_mapdata *mapdata)
 		while (mapdata->map[i][++j])
 			draw_map(mapdata, i, j);
 	}
+	mlx_string_put(mapdata->ptr.mlx, mapdata->ptr.win, \
+	10, 10, 0xff00, "Steps:");
+	mlx_string_put(mapdata->ptr.mlx, mapdata->ptr.win, 75, 10, 0xff00, count);
+	free(count);
 	return (0);
 }
 
 int	keys(int key, t_mapdata *mapdata)
 {
-	if (key == UP)
+	if (key == UP || key == 126)
 		move_up(mapdata);
-	else if (key == DOWN)
+	else if (key == DOWN | key == 125)
 		move_down(mapdata);
-	else if (key == LEFT)
+	else if (key == LEFT | key == 123)
 		move_left(mapdata);
-	else if (key == RIGHT)
+	else if (key == RIGHT | key == 124)
 		move_right(mapdata);
 	else if (key == ESC)
 		end(mapdata);
@@ -68,11 +99,4 @@ int	end(t_mapdata *mapdata)
 	free_mapdata(mapdata);
 	exit(EXIT_SUCCESS);
 	return (0);
-}
-
-void	steps(t_mapdata *mapdata)
-{
-	mapdata->steps++;
-	ft_putnbr_fd(mapdata->steps, 1);
-	ft_putstr_fd("\n", 1);
 }

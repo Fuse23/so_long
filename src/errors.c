@@ -6,11 +6,20 @@
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:22:59 by falarm            #+#    #+#             */
-/*   Updated: 2022/04/21 18:35:27 by falarm           ###   ########.fr       */
+/*   Updated: 2022/05/13 20:54:31 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+
+void	free_sprites(t_mapdata *mapdata)
+{
+	free(mapdata->sprites.collectible);
+	free(mapdata->sprites.floor);
+	free(mapdata->sprites.wall);
+	free(mapdata->sprites.player1);
+	free(mapdata->sprites.exit1);
+}
 
 void	free_mapdata(t_mapdata *mapdata)
 {
@@ -20,6 +29,9 @@ void	free_mapdata(t_mapdata *mapdata)
 	while (mapdata->map[++i])
 		free(mapdata->map[i]);
 	free(mapdata->map);
+	// free(mapdata->enemy_position);
+	free(mapdata->ptr.mlx);
+	free(mapdata->ptr.win);
 	free(mapdata);
 }
 

@@ -6,7 +6,7 @@
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:26:45 by falarm            #+#    #+#             */
-/*   Updated: 2022/04/28 19:25:23 by falarm           ###   ########.fr       */
+/*   Updated: 2022/05/13 20:51:49 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	init_sprites(t_mapdata *mapdata)
 		|| !mapdata->sprites.collectible)
 	{
 		ft_putendl_fd("Error: can't open xpm file", 2);
+		free_sprites(mapdata);
+		free_mapdata(mapdata);
 		exit(EXIT_FAILURE);
 	}
 }

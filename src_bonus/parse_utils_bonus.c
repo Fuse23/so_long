@@ -6,7 +6,7 @@
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:26:45 by falarm            #+#    #+#             */
-/*   Updated: 2022/04/29 19:12:39 by falarm           ###   ########.fr       */
+/*   Updated: 2022/05/13 20:53:40 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_mapdata	*init_mapdata(char *line)
 	mapdata->score = 0;
 	mapdata->curent_score = 0;
 	mapdata->steps = 0;
+	mapdata->enemy = 0;
 	mapdata->ptr.mlx = mlx_init();
 	mapdata->ptr.win = mlx_new_window(mapdata->ptr.mlx, \
 	mapdata->width * SPRITE_X, mapdata->hight * SPRITE_Y, "so_long");
@@ -100,6 +101,35 @@ void	init_sprites2(t_mapdata *mapdata, int x, int y)
 		|| !mapdata->sprites.player2)
 	{
 		ft_putendl_fd("Error: can't open xpm file", 2);
+		free_sprites_bonus(mapdata);
+		free_mapdata(mapdata);
 		exit(EXIT_FAILURE);
 	}
+	mapdata->sprites.enemy = mapdata->sprites.enemy1;
+	mapdata->sprites.player = mapdata->sprites.player1;
+	mapdata->sprites.exit = mapdata->sprites.exit1;
 }
+
+void	init_enemy(t_mapdata *mapdata)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (mapdata->map[i])
+	{
+		j = 0;
+		while (mapdata->map[i][j])
+		{
+			if (mapdata->map[i][j] == 'X')
+			{
+				mapdata->enemy_position[mapdata->enemy].x = j;
+				mapdata->enemy_position[mapdata->enemy].y = i;
+				mapdata->enemy++;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+

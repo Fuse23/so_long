@@ -6,7 +6,7 @@
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 17:41:18 by falarm            #+#    #+#             */
-/*   Updated: 2022/04/29 18:55:46 by falarm           ###   ########.fr       */
+/*   Updated: 2022/05/13 18:28:27 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_mapdata	*parsing_map(int argc, char **argv)
 	check_map_line_bonus(mapdata);
 	check_map_arg(mapdata, -1, -1);
 	check_map_border(mapdata, -1, -1);
+	init_enemy(mapdata);
 	return (mapdata);
 }
 

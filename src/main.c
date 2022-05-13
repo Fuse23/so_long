@@ -6,7 +6,7 @@
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 17:41:18 by falarm            #+#    #+#             */
-/*   Updated: 2022/04/21 19:52:40 by falarm           ###   ########.fr       */
+/*   Updated: 2022/05/13 20:46:33 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int	main(int argc, char **argv)
 	mapdata = parsing_map(argc, argv);
 	play(mapdata);
 	free_mapdata(mapdata);
+	// check_leaks();
 	return (0);
 }

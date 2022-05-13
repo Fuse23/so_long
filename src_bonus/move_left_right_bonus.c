@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_left_right.c                                  :+:      :+:    :+:   */
+/*   move_left_right_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:06:24 by falarm            #+#    #+#             */
-/*   Updated: 2022/04/28 18:32:46 by falarm           ###   ########.fr       */
+/*   Updated: 2022/05/13 20:11:22 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	left(t_mapdata *mapdata)
 	mapdata->map[mapdata->player_psition_x] \
 	[mapdata->player_psition_y] = '0';
 	mapdata->player_psition_y--;
-	steps(mapdata);
+	mapdata->steps++;
 }
 
 void	right(t_mapdata *mapdata)
@@ -29,7 +29,7 @@ void	right(t_mapdata *mapdata)
 	mapdata->map[mapdata->player_psition_x] \
 	[mapdata->player_psition_y] = '0';
 	mapdata->player_psition_y++;
-	steps(mapdata);
+	mapdata->steps++;
 }
 
 void	move_left(t_mapdata *mapdata)
@@ -47,6 +47,9 @@ void	move_left(t_mapdata *mapdata)
 	[mapdata->player_psition_y - 1] == 'E'
 		&& mapdata->curent_score == mapdata->score)
 		end(mapdata);
+	else if (mapdata->map[mapdata->player_psition_x] \
+	[mapdata->player_psition_y - 1] == 'X')
+		end(mapdata);
 }
 
 void	move_right(t_mapdata *mapdata)
@@ -63,5 +66,8 @@ void	move_right(t_mapdata *mapdata)
 	else if (mapdata->map[mapdata->player_psition_x] \
 	[mapdata->player_psition_y + 1] == 'E'
 		&& mapdata->curent_score == mapdata->score)
+		end(mapdata);
+	else if (mapdata->map[mapdata->player_psition_x] \
+	[mapdata->player_psition_y + 1] == 'X')
 		end(mapdata);
 }
