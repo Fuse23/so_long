@@ -3,7 +3,7 @@ A small 2D game using the minilibx library. More about project in [subject](http
 
 My score: [![falarm's 42 so_long Score](https://badge42.vercel.app/api/v2/cl23rylyn001609lbgc4t4lzn/project/2577483)](https://github.com/JaeSeoKim/badge42)
 
-![image](https://user-images.githubusercontent.com/57636684/168474751-24430f4a-410f-491e-8c3f-f4c1316dcf31.png)
+![giphy](https://user-images.githubusercontent.com/57636684/192562155-2645ce75-5576-4b1e-bc83-dff458ee9bcf.gif)
 
 MiniLibX library
 ----------------
