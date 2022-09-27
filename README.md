@@ -1,9 +1,7 @@
 # so_long
-A small 2D game using the minilibx library
+A small 2D game using the minilibx library. More about project in [subject](https://github.com/Fuse23/so_long/blob/main/en.subject.pdf).
 
-[![falarm's 42 so_long Score](https://badge42.vercel.app/api/v2/cl23rylyn001609lbgc4t4lzn/project/2577483)](https://github.com/JaeSeoKim/badge42)
-
-[subject](https://github.com/Fuse23/so_long/blob/main/en.subject.pdf)
+My score: [![falarm's 42 so_long Score](https://badge42.vercel.app/api/v2/cl23rylyn001609lbgc4t4lzn/project/2577483)](https://github.com/JaeSeoKim/badge42)
 
 ![image](https://user-images.githubusercontent.com/57636684/168474751-24430f4a-410f-491e-8c3f-f4c1316dcf31.png)
 
