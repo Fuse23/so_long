@@ -81,11 +81,11 @@ int	keys(int key, t_mapdata *mapdata)
 {
 	if (key == UP || key == 126)
 		move_up(mapdata);
-	else if (key == DOWN | key == 125)
+	else if (key == DOWN || key == 125)
 		move_down(mapdata);
-	else if (key == LEFT | key == 123)
+	else if (key == LEFT || key == 123)
 		move_left(mapdata);
-	else if (key == RIGHT | key == 124)
+	else if (key == RIGHT || key == 124)
 		move_right(mapdata);
 	else if (key == ESC)
 		end();
