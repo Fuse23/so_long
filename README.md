@@ -1,5 +1,5 @@
 # so_long
-A small 2D game using the minilibx library. More about project in [subject](https://github.com/Fuse23/so_long/blob/main/en.subject.pdf).
+A small 2D game using the minilibx library. In the main part of the project, the game has a step counter and the map is parsed from the file. In the bonus part, enemies are added, enemies move randomly. More about project in [subject](https://github.com/Fuse23/so_long/blob/main/en.subject.pdf).
 
 My score: [![falarm's 42 so_long Score](https://badge42.vercel.app/api/v2/cl23rylyn001609lbgc4t4lzn/project/2577483)](https://github.com/JaeSeoKim/badge42)
 
